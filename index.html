@@ -3,315 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruang Ujian CBT - SMP IT Al-Kautsar</title>
-    <link rel="icon" href="smpit.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="logosmpit.png">
+    <title>Form Absensi Karyawan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* CSS RESET & VARIABLES */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+        :root {
+            /* Palette Biru Cerah & Teknologi (Sama dengan sebelumnya) */
+            --primary: #0284c7;      
+            --accent: #06b6d4;       
+            --bg-page: #f0f9ff;      
+            --glass-bg: rgba(255, 255, 255, 0.75); 
+            --text-main: #334155;    
+            --text-light: #64748b;   
+            --input-bg: #ffffff;     
+            --shadow: 0 10px 40px -10px rgba(2, 132, 199, 0.2); 
         }
 
+        * { box-sizing: border-box; outline: none; }
+        
         body {
-            background: #0f172a;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-page);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(2, 132, 199, 0.15) 0%, transparent 40%);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px 15px;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px; /* Sedikit lebih ramping untuk form absensi */
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid white;
+            border-radius: 24px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            animation: slideUp 0.6s ease-out;
             position: relative;
             overflow: hidden;
-            color: #ffffff;
         }
 
-        /* BACKGROUND FUTURISTIC EFFECTS */
-        .bg-shape1, .bg-shape2 {
+        .container::before {
+            content: '';
             position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: -1;
-        }
-        .bg-shape1 {
-            width: 400px;
-            height: 400px;
-            background: rgba(56, 189, 248, 0.4);
-            top: -100px;
-            left: -100px;
-        }
-        .bg-shape2 {
-            width: 500px;
-            height: 500px;
-            background: rgba(139, 92, 246, 0.4);
-            bottom: -150px;
-            right: -100px;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
         }
 
-        /* GLASSMORPHISM CONTAINER */
-        .login-container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 40px;
-            width: 100%;
-            max-width: 450px;
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* HEADER */
+        .header {
             text-align: center;
-            z-index: 1;
+            margin-bottom: 35px;
         }
 
-        /* LOGO & TYPOGRAPHY */
-        .logo {
+        .header-logo {
             width: 90px;
             height: auto;
-            margin-bottom: 20px;
-            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.3));
+            margin-bottom: 15px;
+            filter: drop-shadow(0 5px 15px rgba(2, 132, 199, 0.2));
+            transition: transform 0.3s;
+        }
+        
+        .header-logo:hover { transform: scale(1.05); }
+
+        .header h2 {
+            font-size: 1.6rem;
+            margin: 0;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
         }
 
-        h1 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 30px;
-            line-height: 1.5;
-            color: #e2e8f0;
-        }
-
-        /* FORM ELEMENTS */
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        label {
-            display: block;
-            font-size: 0.85rem;
-            margin-bottom: 8px;
-            color: #cbd5e1;
+        .header p {
+            color: var(--text-light);
+            font-size: 0.8rem;
+            margin-top: 5px;
             font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
 
-        select {
+        /* INPUT STYLING */
+        .input-group { margin-bottom: 20px; position: relative; }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
             width: 100%;
-            padding: 12px 15px;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            color: #ffffff;
-            font-size: 0.95rem;
-            outline: none;
-            transition: all 0.3s ease;
-            appearance: none; /* Removes default dropdown arrow */
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 15px center;
-            background-size: 15px;
-            cursor: pointer;
+            padding: 14px 16px;
+            background: var(--input-bg);
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.25s ease;
         }
 
-        select:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.1);
         }
 
-        select:disabled {
-            background: rgba(255, 255, 255, 0.02);
-            color: #64748b;
-            cursor: not-allowed;
-            border-color: rgba(255, 255, 255, 0.05);
+        /* ICONS */
+        .input-wrapper { position: relative; }
+        .input-wrapper i {
+            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+            color: var(--primary); z-index: 2;
         }
+        .input-wrapper input { padding-left: 45px; }
 
-        select option {
-            background: #1e293b;
-            color: #ffffff;
-        }
-
-        /* BUTTON */
+        /* BUTTON SUBMIT */
         .btn-submit {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border: none;
-            border-radius: 10px;
+            padding: 16px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
-            font-size: 1rem;
-            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 1px;
             cursor: pointer;
+            box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.4);
             transition: all 0.3s ease;
-            margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            text-transform: uppercase;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
 
         .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -5px rgba(6, 182, 212, 0.5);
+        }
+        
+        .btn-submit:disabled {
+            background: #cbd5e1;
+            cursor: wait;
         }
 
         /* FOOTER */
         .footer-credit {
+            text-align: center;
             margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
             font-size: 0.75rem;
             color: #94a3b8;
+            font-weight: 500;
+            letter-spacing: 0.5px;
             line-height: 1.6;
         }
-        
+
         .footer-credit span {
-            font-weight: 600;
-            color: #38bdf8;
+            color: var(--primary);
+            font-weight: 700;
         }
 
         /* LOADER */
         .loader {
+            width: 20px; height: 20px;
+            border: 3px solid #FFF;
+            border-bottom-color: transparent;
+            border-radius: 50%;
             display: none;
-            font-size: 0.8rem;
-            color: #38bdf8;
-            margin-top: 5px;
+            animation: rotation 1s linear infinite;
         }
+        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .loading-text { display: none; margin-left: 10px; font-size: 0.9rem; color: var(--primary); font-style: italic;}
+
     </style>
 </head>
 <body>
 
-    <div class="bg-shape1"></div>
-    <div class="bg-shape2"></div>
-
-    <div class="login-container">
-        <img src="smpit.png" alt="Logo SMP IT Al-Kautsar" class="logo" onerror="this.src='https://via.placeholder.com/90?text=LOGO'">
+<div class="container">
+    <div class="header">
+        <img src="logosmpit.png" alt="Logo Instansi" class="header-logo">
         
-        <h1>Selamat Datang di Ruang Ujian<br>SMP IT Al-Kautsar Mukomuko</h1>
+        <h2>Form Absensi Karyawan</h2>
+        <p>Smart Input System v2.0</p>
+    </div>
 
-        <form id="loginForm">
-            <div class="input-group">
-                <label for="pilihKelas">Pilih Kelas</label>
-                <select id="pilihKelas" required>
-                    <option value="" disabled selected>-- Silakan Pilih Kelas --</option>
-                    <option value="9 Al-Quran">9 Al-Quran</option>
-                    <option value="9 As-Sunnah">9 As-Sunnah</option>
-                    <option value="9 Al-Hadits">9 Al-Hadits</option>
-                    </select>
+    <form name="submit-to-google-sheet">
+        
+        <div class="input-group">
+            <label>Tanggal</label>
+            <div class="input-wrapper">
+                <i class="fa-regular fa-calendar"></i>
+                <input type="date" name="tanggal" id="tanggal" class="form-control" required>
             </div>
+        </div>
 
-            <div class="input-group">
-                <label for="pilihSiswa">Nama Siswa</label>
-                <select id="pilihSiswa" required disabled>
-                    <option value="" disabled selected>-- Pilih Kelas Terlebih Dahulu --</option>
-                </select>
-                <div id="loadingSiswa" class="loader">Memuat data siswa dari server...</div>
+        <div class="input-group">
+            <label>Nama Guru / Karyawan</label>
+            <select name="nama" id="namaGuru" class="form-control" required>
+                <option value="">Memuat Database...</option>
+            </select>
+            <small id="loading-msg" class="loading-text">Sedang menyinkronkan data...</small>
+        </div>
+
+        <div class="input-group">
+            <label>Keterangan</label>
+            <select name="keterangan" class="form-control" required>
+                <option value="" disabled selected>Pilih Status...</option>
+                <option value="Sakit">Sakit</option>
+                <option value="Izin">Izin</option>
+                <option value="Alfa">Alfa</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Catatan</label>
+            <div class="input-wrapper">
+                <i class="fa-regular fa-pen-to-square"></i>
+                <input type="text" name="catatan" class="form-control" placeholder="Keterangan tambahan (opsional)...">
             </div>
+        </div>
 
-            <div class="input-group">
-                <label for="pilihMapel">Pilih Mata Pelajaran</label>
-                <select id="pilihMapel" required>
-                    <option value="" disabled selected>-- Silakan Pilih Mapel --</option>
-                    <option value="PAI">PAI</option>
-                    <option value="PKN">PKN</option>
-                    <option value="IND">Bahasa Indonesia (IND)</option>
-                    <option value="MTK">Matematika (MTK)</option>
-                    <option value="IPA">Ilmu Pengetahuan Alam (IPA)</option>
-                    <option value="IPS">Ilmu Pengetahuan Sosial (IPS)</option>
-                    <option value="ING">Bahasa Inggris (ING)</option>
-                    <option value="PJOK">PJOK</option>
-                    <option value="TIK">TIK</option>
-                    <option value="SBK">SBK</option>
-                    <option value="ARAB">Bahasa Arab</option>
-                    <option value="T2Q">Tahsin Tahfidz Qur'an (T2Q)</option>
-                    <option value="BPI">Bina Pribadi Islami (BPI)</option>
-                </select>
-            </div>
-
-            <button type="submit" class="btn-submit">Lanjutkan Ujian</button>
-        </form>
+        <button type="submit" class="btn-submit">
+            <span class="btn-text">KIRIM DATA</span>
+            <span class="loader"></span>
+        </button>
 
         <div class="footer-credit">
             &copy; 2026 <span>aktechmaster</span> <br>
             Designed & Developed by aktechmaster
         </div>
-    </div>
 
-    <script>
-        const kelasSelect = document.getElementById('pilihKelas');
-        const siswaSelect = document.getElementById('pilihSiswa');
-        const loadingText = document.getElementById('loadingSiswa');
-        const form = document.getElementById('loginForm');
+    </form>
+</div>
 
-        // URL Google Apps Script Anda (Ganti dengan Web App URL dari Spreadsheet Anda nantinya)
-        // const SPREADSHEET_API_URL = "https://script.google.com/macros/s/AKfycb.../exec";
+<script>
+    // --- KONFIGURASI ---
+    // GANTI URL INI DENGAN URL WEB APP DARI LANGKAH 1
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbz8KXfxsOkoRshEVGOjc6eK0hL7qvV4iYXTlmxuoDIwspHoq48maE-MwpQltm0DjURLLQ/exec'; 
 
-        // ==========================================
-        // DUMMY DATA SEMENTARA (Simulasi Database)
-        // Hapus ini jika Anda sudah menyambungkan Google Sheets
-        // ==========================================
-        const dummyDatabase = {
-            "9 Al-Quran": ["Ahmad Fulan", "Budi Santoso", "Citra Kirana", "Deni Saputra"],
-            "9 As-Sunnah": ["Eka Prasetya", "Faisal Rahman", "Gita Gutawa"],
-            "9 Al-Hadits": ["Hadi Pratama", "Intan Permata", "Joko Susilo"]
-        };
+    const form = document.forms['submit-to-google-sheet'];
+    const btnSubmit = document.querySelector('.btn-submit');
+    const btnText = document.querySelector('.btn-text');
+    const loader = document.querySelector('.loader');
+    const selectGuru = document.getElementById('namaGuru');
+    const inputTanggal = document.getElementById('tanggal');
 
-        // Logika ketika Kelas dipilih
-        kelasSelect.addEventListener('change', async function() {
-            const selectedKelas = this.value;
-            
-            // Reset dropdown siswa
-            siswaSelect.innerHTML = '<option value="" disabled selected>-- Silakan Pilih Nama Anda --</option>';
-            siswaSelect.disabled = true;
-            loadingText.style.display = 'block';
+    // 1. Set Tanggal Hari Ini Otomatis
+    const today = new Date().toISOString().split('T')[0];
+    inputTanggal.value = today;
 
-            try {
-                // ========================================================
-                // CARA ASLI (FETCH DARI GOOGLE SHEETS):
-                // Jika ingin pakai data asli, uncomment kode di bawah ini:
-                // ========================================================
-                // const response = await fetch(`${SPREADSHEET_API_URL}?kelas=${selectedKelas}`);
-                // const data = await response.json();
-                // const daftarSiswa = data.siswa; // Asumsi response JSON memiliki array 'siswa'
+    // 2. Load Data Guru dari Spreadsheet saat halaman dibuka
+    window.addEventListener('load', () => {
+        document.getElementById('loading-msg').style.display = 'block';
+        
+        fetch(scriptURL)
+            .then(response => response.json())
+            .then(response => {
+                let html = '<option value="" disabled selected>Pilih Nama Anda...</option>';
+                response.data.forEach(nama => {
+                    html += `<option value="${nama}">${nama}</option>`;
+                });
+                selectGuru.innerHTML = html;
+                document.getElementById('loading-msg').style.display = 'none';
+            })
+            .catch(error => {
+                console.error('Error loading names!', error.message);
+                selectGuru.innerHTML = '<option value="">Gagal Memuat Data</option>';
+                document.getElementById('loading-msg').innerText = 'Gagal koneksi ke database';
+            });
+    });
+
+    // 3. Kirim Data ke Spreadsheet
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        
+        // UI Loading State
+        btnSubmit.disabled = true;
+        btnText.innerText = 'MENGIRIM...';
+        loader.style.display = 'inline-block';
+
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                // Reset Form & UI
+                btnSubmit.disabled = false;
+                btnText.innerText = 'KIRIM DATA';
+                loader.style.display = 'none';
                 
-                // ========================================================
-                // CARA SIMULASI (Pakai delay agar terlihat futuristik):
-                // ========================================================
-                await new Promise(resolve => setTimeout(resolve, 800)); // Delay 0.8 detik
-                const daftarSiswa = dummyDatabase[selectedKelas] || [];
+                // Alert Sukses (Simple)
+                alert('Data Absensi Berhasil Disimpan!');
+                form.reset();
+                inputTanggal.value = today; // Set tanggal lagi setelah reset
+            })
+            .catch(error => {
+                btnSubmit.disabled = false;
+                btnText.innerText = 'COBA LAGI';
+                loader.style.display = 'none';
+                console.error('Error!', error.message);
+                alert('Terjadi kesalahan saat mengirim data. Coba lagi.');
+            });
+    });
+</script>
 
-                // Masukkan data ke dropdown siswa
-                if (daftarSiswa.length > 0) {
-                    daftarSiswa.forEach(siswa => {
-                        const option = document.createElement('option');
-                        option.value = siswa;
-                        option.textContent = siswa;
-                        siswaSelect.appendChild(option);
-                    });
-                    siswaSelect.disabled = false;
-                } else {
-                    siswaSelect.innerHTML = '<option value="" disabled selected>Data siswa tidak ditemukan</option>';
-                }
-
-            } catch (error) {
-                console.error("Gagal mengambil data:", error);
-                siswaSelect.innerHTML = '<option value="" disabled selected>Gagal memuat data. Cek koneksi.</option>';
-            } finally {
-                loadingText.style.display = 'none';
-            }
-        });
-
-        // Logika Tombol Lanjutkan
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Mencegah reload halaman
-            
-            const kelas = document.getElementById('pilihKelas').value;
-            const siswa = document.getElementById('pilihSiswa').value;
-            const mapel = document.getElementById('pilihMapel').value;
-
-            // Simpan data login ke Session Storage agar bisa dibaca di halaman ujian
-            sessionStorage.setItem('cbt_kelas', kelas);
-            sessionStorage.setItem('cbt_siswa', siswa);
-            sessionStorage.setItem('cbt_mapel', mapel);
-
-            // Arahkan ke halaman ujian
-            // Ganti "ujian.html" dengan nama file halaman soal Anda
-            alert(`Berhasil Login!\n\nNama: ${siswa}\nKelas: ${kelas}\nMapel: ${mapel}\n\nSistem akan mengarahkan ke halaman ujian.`);
-            window.location.href = "ujian.html"; 
-        });
-    </script>
 </body>
 </html>
